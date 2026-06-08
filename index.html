@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20240839 이윤서 포트폴리오</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ice: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            primary: '#e3f2fd', // 아이스 블루 기본 컬러
+                            accent: '#00e5ff',  // 청량한 포인트 컬러
+                            dark: '#0f172a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans KR', 'Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #f8fafc;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(224, 242, 254, 0.4) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(186, 230, 253, 0.3) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        /* 글래스모피즘 효과 */
+        .glass {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .glass-dark {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* 스크롤바 디자인 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #bae6fd;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7dd3fc;
+        }
+        /* 카드 호버 효과 */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.15), 0 8px 10px -6px rgba(14, 165, 233, 0.15);
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 antialiased min-h-screen">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="main-header">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <nav class="glass rounded-2xl px-6 py-3 flex items-center justify-between shadow-sm">
+                <!-- 로고 -->
+                <a href="#home" class="flex items-center space-x-2">
+                    <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-ice-300 to-ice-500 flex items-center justify-center text-white font-bold text-lg shadow-sm">P</span>
+                    <span class="font-bold text-lg tracking-wide text-slate-800">PORTFOLIO</span>
+                </a>
+
+                <!-- 데스크탑 메뉴 -->
+                <div class="hidden md:flex items-center space-x-8 font-medium">
+                    <a href="#home" class="text-slate-600 hover:text-ice-600 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-ice-500 hover:after:w-full after:transition-all">Home</a>
+                    <a href="#about" class="text-slate-600 hover:text-ice-600 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-ice-500 hover:after:w-full after:transition-all">About Me</a>
+                    <a href="#skills" class="text-slate-600 hover:text-ice-600 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-ice-500 hover:after:w-full after:transition-all">Skills</a>
+                    <a href="#projects" class="text-slate-600 hover:text-ice-600 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-ice-500 hover:after:w-full after:transition-all">Projects</a>
+                    <a href="#contact" class="text-slate-600 hover:text-ice-600 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-ice-500 hover:after:w-full after:transition-all">Contact</a>
+                </div>
+
+                <!-- 모바일 메뉴 버튼 -->
+                <button id="menu-btn" class="md:hidden p-2 text-slate-600 hover:text-ice-600 focus:outline-none" aria-label="메뉴 열기">
+                    <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
+                </button>
+            </nav>
+        </div>
+
+        <!-- 모바일 드롭다운 메뉴 -->
+        <div id="mobile-menu" class="hidden px-4 pb-4 md:hidden">
+            <div class="glass rounded-xl p-4 space-y-3 flex flex-col shadow-lg border border-white/50">
+                <a href="#home" class="mobile-link text-slate-600 hover:text-ice-600 font-medium py-2 px-3 rounded-lg hover:bg-white/50 transition-all">Home</a>
+                <a href="#about" class="mobile-link text-slate-600 hover:text-ice-600 font-medium py-2 px-3 rounded-lg hover:bg-white/50 transition-all">About Me</a>
+                <a href="#skills" class="mobile-link text-slate-600 hover:text-ice-600 font-medium py-2 px-3 rounded-lg hover:bg-white/50 transition-all">Skills</a>
+                <a href="#projects" class="mobile-link text-slate-600 hover:text-ice-600 font-medium py-2 px-3 rounded-lg hover:bg-white/50 transition-all">Projects</a>
+                <a href="#contact" class="mobile-link text-slate-600 hover:text-ice-600 font-medium py-2 px-3 rounded-lg hover:bg-white/50 transition-all">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+<main class="pt-24">
+        
+        <!-- HERO SECTION (HOME) -->
+        <section id="home" class="min-h-[85vh] flex items-center justify-center px-4 py-12 relative overflow-hidden">
+            <!-- 시각 장식용 아지랑이/구형 물체 -->
+            <div class="absolute w-[300px] h-[300px] bg-sky-200/40 rounded-full blur-3xl -top-12 -left-12 -z-10 animate-pulse" style="animation-duration: 8s;"></div>
+            <div class="absolute w-[400px] h-[400px] bg-ice-100/50 rounded-full blur-3xl bottom-0 right-0 -z-10 animate-pulse" style="animation-duration: 12s;"></div>
+
+            <div class="max-w-4xl mx-auto text-center z-10">
+                <!-- 아이스 블루 테두리 뱃지 -->
+                <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold tracking-wider text-ice-600 bg-ice-100/60 border border-ice-200 mb-6 uppercase">
+                    Silent Information Security Portfolio
+                </span>
+                
+                <!-- 메인 타이틀 -->
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-black text-slate-800 tracking-tight leading-tight mb-6">
+                    안전한 미래를 만들기 위한<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-ice-500 via-ice-600 to-sky-400">
+                        정보보안가 이윤서
+                    </span>입니다.
+                </h1>
+                
+                <!-- 타이핑 텍스트 -->
+                <div class="text-lg sm:text-xl md:text-2xl text-slate-600 font-medium h-12 mb-8 flex items-center justify-center">
+                    <span id="typing-text" class="border-r-2 border-ice-500 pr-1 animate-shimmer"></span>
+                </div>
+
+                <!-- CTA 버튼 그룹 -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-ice-500 hover:bg-ice-600 text-white font-semibold rounded-xl shadow-md hover:shadow-lg hover:shadow-ice-200 transition-all text-center">
+                        함께 일하기 <i class="fa-solid fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                    <a href="#about" class="w-full sm:w-auto px-8 py-4 glass hover:bg-white text-slate-700 font-semibold rounded-xl transition-all border border-slate-200 text-center">
+                        더 알아보기
+                    </a>
+                </div>
+
+                <!-- 다운스크롤 아이콘 -->
+                <div class="mt-16 animate-bounce">
+                    <a href="#about" class="text-ice-400 hover:text-ice-600 transition-colors" aria-label="아래로 스크롤">
+                        <i class="fa-solid fa-chevron-down text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            </section>
+
+        <!-- ABOUT ME SECTION -->
+        <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto scroll-mt-12">
+            <!-- 섹션 헤더 -->
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-800 relative inline-block">
+                    About Me
+                    <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-ice-400 rounded-full"></span>
+                </h2>
+                <p class="mt-4 text-slate-500 max-w-lg mx-auto">세상에 보호받지 못할 정보는 없습니다.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                <!-- 프로필 카드 (글래스모피즘) -->
+                <div class="lg:col-span-5 glass rounded-3xl p-8 flex flex-col justify-between items-center text-center border border-white/80 shadow-md">
+                    <div>
+                        <!-- 가상 프로필 이미지 (SVG 및 아이콘 기반 청량한 그래픽) -->
+                        <div class="w-36 h-36 mx-auto rounded-full bg-gradient-to-tr from-ice-100 to-ice-300 p-1 mb-6 shadow-inner relative flex items-center justify-center overflow-hidden">
+                            <div class="w-full h-full rounded-full bg-white flex items-center justify-center text-ice-500 text-5xl">
+                                <i class="fa-regular fa-face-smile-wink"></i>
+                            </div>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-slate-800">이윤서</h3>
+                        <p class="text-ice-600 font-medium mt-1">Information Security</p>
+                        
+                        <p class="text-slate-600 text-sm mt-6 leading-relaxed max-w-sm mx-auto">
+                            보안 앞에서는 그 무엇도 양보하지 않는 냉정한 정보보안가입니다. 더 안전하고 윤리적인 미래를 위해 신념을 굳건히 지킵니다.
+                        </p>
+                    </div>
+
+                    <!-- 소셜 링크 -->
+                    <div class="flex items-center space-x-4 mt-8">
+                        <a href="https://github.com/yoon0826der" class="w-10 h-10 rounded-full bg-white hover:bg-ice-100 text-slate-600 hover:text-ice-600 flex items-center justify-center shadow-sm border border-slate-100 transition-all" aria-label="Github">
+                            <i class="fa-brands fa-github text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 상세 정보 Grid -->
+                <div class="lg:col-span-7 flex flex-col justify-between gap-6">
+                    <!-- 기본 인포 카드 4종 -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="glass hover-lift rounded-2xl p-6 border border-white/60">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 rounded-xl bg-ice-100/80 text-ice-600 flex items-center justify-center">
+                                    <i class="fa-solid fa-user text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-semibold uppercase tracking-wider">이름 / 생년월일</p>
+                                    <p class="text-base font-bold text-slate-700 mt-0.5">이윤서 / 2005.08.26</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass hover-lift rounded-2xl p-6 border border-white/60">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 rounded-xl bg-ice-100/80 text-ice-600 flex items-center justify-center">
+                                    <i class="fa-solid fa-envelope text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-semibold uppercase tracking-wider">이메일 주소</p>
+                                    <p class="text-base font-bold text-slate-700 mt-0.5">yoon0826der@dongyang.ac.kr</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass hover-lift rounded-2xl p-6 border border-white/60">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 rounded-xl bg-ice-100/80 text-ice-600 flex items-center justify-center">
+                                    <i class="fa-solid fa-location-dot text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-semibold uppercase tracking-wider">활동 지역</p>
+                                    <p class="text-base font-bold text-slate-700 mt-0.5">서울특별시, 대한민국</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass hover-lift rounded-2xl p-6 border border-white/60">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 rounded-xl bg-ice-100/80 text-ice-600 flex items-center justify-center">
+                                    <i class="fa-solid fa-graduation-cap text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 font-semibold uppercase tracking-wider">학력 및 전공</p>
+                                    <p class="text-base font-bold text-slate-700 mt-0.5">동양미래대학교 <br> 컴퓨터소프트웨어공학과</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 타임라인/가치관 영역 -->
+                    <div class="glass rounded-2xl p-6 sm:p-8 border border-white/60 flex-grow">
+                        <h4 class="text-lg font-bold text-slate-800 mb-4 flex items-center">
+                            <span class="w-1.5 h-6 bg-ice-400 rounded-full mr-3"></span>
+                            My Story & Core Values
+                        </h4>
+                        <div class="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+                            <p>
+                                중학생 때 읽은 책 한 권으로 보안에 관심을 가지게 되었고 <br>
+                                최근 늘어나는 보안 이슈로 인해 이 길로 꼭 가야겠다는 생각을 했습니다.
+                                <br><br>
+                                눈 앞에 보이는 보상에 급급하지 않고 모두를 위한 <br>
+                                지속적인 미래를 위해 조용히 묵묵하게 노력합니다.
+                            </p>
+                            <div class="pt-4 flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-white text-ice-700 border border-ice-100 rounded-lg text-xs font-semibold">#냉정한_분석</span>
+                                <span class="px-3 py-1 bg-white text-ice-700 border border-ice-100 rounded-lg text-xs font-semibold">#신속한_피드백수용</span>
+                                <span class="px-3 py-1 bg-white text-ice-700 border border-ice-100 rounded-lg text-xs font-semibold">#윤리적인_직업정신</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto scroll-mt-12">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-800 relative inline-block">
+                    Skills
+                    <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-ice-400 rounded-full"></span>
+                </h2>
+                <p class="mt-4 text-slate-500 max-w-lg mx-auto">기술들을 적재적소에 올바르게 사용하기 위해 연구합니다.</p>
+            </div>
+
+            <!-- 기술 카테고리 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Frontend -->
+                <div class="glass hover-lift rounded-3xl p-6 sm:p-8 border border-white/60">
+                    <div class="w-12 h-12 rounded-xl bg-ice-100 text-ice-600 flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-code text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-6">기술1</h3>
+                    <div class="space-y-5">
+                        <!-- 스킬 바 -->
+                        <div>
+                            <div class="flex justify-between mb-1 text-sm font-semibold text-slate-700">
+                                <span>기술1-1</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-ice-300 to-ice-500 h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1 text-sm font-semibold text-slate-700">
+                                <span>기술1-2</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-ice-300 to-ice-500 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1 text-sm font-semibold text-slate-700">
+                                <span>기술1-3</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-ice-300 to-ice-500 h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CSS Frameworks & Tools -->
+                <div class="glass hover-lift rounded-3xl p-6 sm:p-8 border border-white/60">
+                    <div class="w-12 h-12 rounded-xl bg-ice-100 text-ice-600 flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-paintbrush text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-6">기술2</h3>
+                    <div class="space-y-5">
+                        <div>
+                            <div class="flex justify-between mb-1 text-sm font-semibold text-slate-700">
+                                <span>기술2-1</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-ice-300 to-ice-500 h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1 text-sm font-semibold text-slate-700">
+                                <span>기술2-2</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-ice-300 to-ice-500 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1 text-sm font-semibold text-slate-700">
+                                <span>기술2-3</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-ice-300 to-ice-500 h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Others & Collaboration -->
+                <div class="glass hover-lift rounded-3xl p-6 sm:p-8 border border-white/60">
+                    <div class="w-12 h-12 rounded-xl bg-ice-100 text-ice-600 flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-arrows-spin text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-6">기술3</h3>
+                    <div class="space-y-5">
+                        <div>
+                            <div class="flex justify-between mb-1 text-sm font-semibold text-slate-700">
+                                <span>기술3-1</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-ice-300 to-ice-500 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1 text-sm font-semibold text-slate-700">
+                                <span>기술3-2</span>
+                                <span>65%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-ice-300 to-ice-500 h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1 text-sm font-semibold text-slate-700">
+                                <span>기술3-3</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-ice-300 to-ice-500 h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto scroll-mt-12">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-800 relative inline-block">
+                    Projects
+                    <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-ice-400 rounded-full"></span>
+                </h2>
+                <p class="mt-4 text-slate-500 max-w-lg mx-auto">사용 편의성과 유지 보수성을 신경쓴 결과물들입니다.</p>
+            </div>
+
+            <!-- 프로젝트 그리드 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="glass hover-lift rounded-3xl overflow-hidden border border-white/60 flex flex-col h-full shadow-sm">
+                    <!-- 청량한 카드 이미지 placeholder -->
+                    <div class="h-48 w-full bg-gradient-to-br from-ice-100 via-sky-100 to-ice-300 relative flex items-center justify-center">
+                        <i class="fa-solid fa-wind text-ice-500 text-6xl opacity-60"></i>
+                        <span class="absolute bottom-3 right-3 bg-white/90 text-ice-600 text-xs px-2.5 py-1 rounded-md font-bold">예시</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2">포트폴리오1</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed mb-4">
+                                (내용이 들어갑니다.)
+                            </p>
+                        </div>
+                        <div>
+                            <!-- 사용 기술 -->
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 bg-ice-100/50 text-slate-600 text-[11px] font-medium rounded">기술1</span>
+                                <span class="px-2 py-0.5 bg-ice-100/50 text-slate-600 text-[11px] font-medium rounded">기술2</span>
+                                <span class="px-2 py-0.5 bg-ice-100/50 text-slate-600 text-[11px] font-medium rounded">기술3</span>
+                            </div>
+                            <!-- 링크 버튼 -->
+                            <div class="flex justify-between items-center text-sm font-bold border-t border-slate-100 pt-4">
+                                <a href="#" class="text-slate-600 hover:text-ice-600 transition-colors flex items-center">
+                                    <i class="fa-brands fa-github mr-1.5"></i> Github
+                                </a>
+                                <a href="#" class="text-ice-600 hover:text-ice-700 transition-colors flex items-center">
+                                    Live Demo <i class="fa-solid fa-arrow-up-right-from-square ml-1.5 text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass hover-lift rounded-3xl overflow-hidden border border-white/60 flex flex-col h-full shadow-sm">
+                    <!-- 청량한 카드 이미지 placeholder -->
+                    <div class="h-48 w-full bg-gradient-to-br from-blue-100 via-sky-50 to-ice-200 relative flex items-center justify-center">
+                        <i class="fa-regular fa-lightbulb text-ice-500 text-6xl opacity-60"></i>
+                        <span class="absolute bottom-3 right-3 bg-white/90 text-ice-600 text-xs px-2.5 py-1 rounded-md font-bold">예시</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2">포트폴리오2</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed mb-4">
+                                (내용이 들어갑니다.)
+                            </p>
+                        </div>
+                        <div>
+                            <!-- 사용 기술 -->
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 bg-ice-100/50 text-slate-600 text-[11px] font-medium rounded">기술1</span>
+                                <span class="px-2 py-0.5 bg-ice-100/50 text-slate-600 text-[11px] font-medium rounded">기술2</span>
+                                <span class="px-2 py-0.5 bg-ice-100/50 text-slate-600 text-[11px] font-medium rounded">기술3</span>
+                            </div>
+                            <!-- 링크 버튼 -->
+                            <div class="flex justify-between items-center text-sm font-bold border-t border-slate-100 pt-4">
+                                <a href="#" class="text-slate-600 hover:text-ice-600 transition-colors flex items-center">
+                                    <i class="fa-brands fa-github mr-1.5"></i> Github
+                                </a>
+                                <a href="#" class="text-ice-600 hover:text-ice-700 transition-colors flex items-center">
+                                    Live Demo <i class="fa-solid fa-arrow-up-right-from-square ml-1.5 text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="glass hover-lift rounded-3xl overflow-hidden border border-white/60 flex flex-col h-full shadow-sm">
+                    <!-- 청량한 카드 이미지 placeholder -->
+                    <div class="h-48 w-full bg-gradient-to-br from-ice-200 via-sky-100 to-teal-50 relative flex items-center justify-center">
+                        <i class="fa-solid fa-network-wired text-ice-500 text-6xl opacity-60"></i>
+                        <span class="absolute bottom-3 right-3 bg-white/90 text-ice-600 text-xs px-2.5 py-1 rounded-md font-bold">예시</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2">포트폴리오3</h3>
+                            <p class="text-slate-500 text-sm leading-relaxed mb-4">
+                                (내용이 들어갑니다.)
+                            </p>
+                        </div>
+                        <div>
+                            <!-- 사용 기술 -->
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                <span class="px-2 py-0.5 bg-ice-100/50 text-slate-600 text-[11px] font-medium rounded">기술1</span>
+                                <span class="px-2 py-0.5 bg-ice-100/50 text-slate-600 text-[11px] font-medium rounded">기술2</span>
+                                <span class="px-2 py-0.5 bg-ice-100/50 text-slate-600 text-[11px] font-medium rounded">기술3</span>
+                            </div>
+                            <!-- 링크 버튼 -->
+                            <div class="flex justify-between items-center text-sm font-bold border-t border-slate-100 pt-4">
+                                <a href="#" class="text-slate-600 hover:text-ice-600 transition-colors flex items-center">
+                                    <i class="fa-brands fa-github mr-1.5"></i> Github
+                                </a>
+                                <a href="#" class="text-ice-600 hover:text-ice-700 transition-colors flex items-center">
+                                    Live Demo <i class="fa-solid fa-arrow-up-right-from-square ml-1.5 text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto scroll-mt-12">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-800 relative inline-block">
+                    Contact Me
+                    <span class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-ice-400 rounded-full"></span>
+                </h2>
+                <p class="mt-4 text-slate-500 max-w-lg mx-auto">아이디어가 있거나 협업을 원하신다면 언제든 편하게 연락해 주세요.</p>
+            </div>
+
+            <!-- 콘택트 폼 카드 -->
+            <div class="glass rounded-3xl p-6 sm:p-10 border border-white/80 shadow-md">
+                <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-sm font-semibold text-slate-700 mb-2">성함</label>
+                            <input type="text" id="name" required placeholder="홍길동" class="w-full px-4 py-3 bg-white/70 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-ice-300 focus:border-ice-400 transition-all text-slate-800">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-slate-700 mb-2">이메일 주소</label>
+                            <input type="email" id="email" required placeholder="example@email.com" class="w-full px-4 py-3 bg-white/70 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-ice-300 focus:border-ice-400 transition-all text-slate-800">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-sm font-semibold text-slate-700 mb-2">제목</label>
+                        <input type="text" id="subject" required placeholder="협업 및 비즈니스 관련 제안" class="w-full px-4 py-3 bg-white/70 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-ice-300 focus:border-ice-400 transition-all text-slate-800">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-semibold text-slate-700 mb-2">문의 사항</label>
+                        <textarea id="message" rows="5" required placeholder="프로젝트 내용 혹은 문의하고 싶으신 내용을 상세히 기재해 주세요." class="w-full px-4 py-3 bg-white/70 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-ice-300 focus:border-ice-400 transition-all text-slate-800 resize-none"></textarea>
+                    </div>
+
+                    <!-- 제출 단추 -->
+                    <div class="text-right">
+                        <button type="submit" class="w-full sm:w-auto px-8 py-3.5 bg-ice-500 hover:bg-ice-600 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all focus:outline-none flex items-center justify-center gap-2">
+                            <span>메시지 전송</span>
+                            <i class="fa-regular fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-white py-12 mt-20 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 z-10 relative">
+            <div class="flex items-center space-x-3">
+                <span class="w-8 h-8 rounded-lg bg-ice-400 flex items-center justify-center text-white font-bold text-lg">P</span>
+                <span class="font-bold tracking-wider">PORTFOLIO</span>
+            </div>
+            
+            <p class="text-slate-400 text-sm text-center md:text-left">
+                &copy; 2026. Lee Yunseo. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- 알림용 모달 창 (custom-alert) -->
+    <div id="alert-modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 bg-slate-900/60 backdrop-blur-sm hidden">
+        <div class="glass max-w-sm w-full rounded-2xl p-6 border border-white text-center shadow-2xl">
+            <div class="w-16 h-16 mx-auto rounded-full bg-emerald-100 text-emerald-500 flex items-center justify-center mb-4">
+                <i class="fa-solid fa-circle-check text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800 mb-2">메시지 전송 완료!</h3>
+            <p class="text-slate-500 text-sm mb-6 leading-relaxed">
+                성공적으로 접수되었습니다. <br>
+                남겨주신 이메일 주소로 빠른 시일 내에 연락드리겠습니다.
+            </p>
+            <button onclick="closeAlertModal()" class="w-full py-2.5 bg-ice-500 hover:bg-ice-600 text-white font-semibold rounded-xl transition-colors">
+                확인
+            </button>
+        </div>
+    </div>
+
+
+    <script>
+        // -------------------------
+        // 타이핑 효과 (Typing Effect)
+        // -------------------------
+        const words = [
+            "모두의 정보가 안전한 미래를 꿈꿉니다."
+        ];
+        let i = 0;
+        let timer;
+
+        function typingEffect() {
+            let word = words[i].split("");
+            var loopTyping = function() {
+                if (word.length > 0) {
+                    document.getElementById('typing-text').innerHTML += word.shift();
+                } else {
+                    setTimeout(deletingEffect, 2000);
+                    return false;
+                }
+                timer = setTimeout(loopTyping, 100);
+            };
+            loopTyping();
+        }
+
+        function deletingEffect() {
+            let word = words[i].split("");
+            var loopDeleting = function() {
+                if (word.length > 0) {
+                    word.pop();
+                    document.getElementById('typing-text').innerHTML = word.join("");
+                } else {
+                    if (words.length > (i + 1)) {
+                        i++;
+                    } else {
+                        i = 0;
+                    }
+                    setTimeout(typingEffect, 500);
+                    return false;
+                }
+                timer = setTimeout(loopDeleting, 60);
+            };
+            loopDeleting();
+        }
+
+        // 페이지 로드 시 타이핑 애니메이션 시작
+        window.onload = function() {
+            typingEffect();
+        };
+
+
+        // -------------------------
+        // 네비게이션 스크롤 헤더 효과
+        // -------------------------
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 30) {
+                header.classList.add('backdrop-blur-md', 'shadow-md');
+            } else {
+                header.classList.remove('backdrop-blur-md', 'shadow-md');
+            }
+        });
+
+
+        // -------------------------
+        // 모바일 토글 메뉴 기능
+        // -------------------------
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+
+        // 링크 클릭하면 모바일 메뉴 닫기
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+
+
+        // -------------------------
+        // 콘택트 폼 핸들링 & 가상 알림
+        // -------------------------
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            
+            // 입력값 확인 및 수집
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            // 콘솔 출력 (가상 처리 확인용)
+            console.log("Contact submission:", { name, email, subject, message });
+
+            // 성공 모달 노출
+            const modal = document.getElementById('alert-modal');
+            modal.classList.remove('hidden');
+            
+            // 폼 초기화
+            document.getElementById('contact-form').reset();
+        }
+
+        function closeAlertModal() {
+            const modal = document.getElementById('alert-modal');
+            modal.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
